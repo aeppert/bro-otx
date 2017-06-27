@@ -3,6 +3,7 @@
 import requests
 import sys
 import os
+import re
 
 from argparse import ArgumentParser
 from ConfigParser import ConfigParser
@@ -123,7 +124,7 @@ def main():
                     url = pulse[u'references'][0]
                 except IndexError:
                     url = 'https://otx.alienvault.com'
-                fields = [to_unicode(indicator[u'indicator']),
+                fields = [to_unicode(re.sub(r'https?:\/\/','',indicator[u'indicator'])),
                     to_unicode(bro_type),
                     to_unicode(description),
                     to_unicode(url),
